@@ -1,0 +1,29 @@
+{
+  "name": "fractal-container",
+  "module": "server.ts",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch server.ts",
+    "build": "bun build server.ts --target bun --outdir ./dist",
+    "start": "NODE_ENV=production bun dist/server.js",
+    "ui:dev": "cd ui && bun run dev",
+    "ui:build": "cd ui && bun run build",
+    "ui:preview": "cd ui && bun run preview",
+    "ui:lint": "cd ui && bun run lint",
+    "ui:install": "cd ui && bun install"
+
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.10",
+    "@types/mime-types": "^2.1.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/static": "^1.1.1",
+    "elysia": "^1.1.17",
+    "mime-types": "^2.1.35"
+  }
+}
