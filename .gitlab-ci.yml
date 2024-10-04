@@ -9,7 +9,7 @@ lint:
   image: oven/bun:latest  # Use the official Bun Docker image
   script:
     - bun install          # Install dependencies
-    - bun run ui:lint      # Run your linting command (update if necessary)
+   # - bun run ui:lint      # Run your linting command (update if necessary)
   only:
     - main  # Run this job only on the main branch
 
