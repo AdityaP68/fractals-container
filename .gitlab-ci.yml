@@ -36,6 +36,7 @@ build:
     - bun install          # Install dependencies
     - bun run ui:install   # Install UI dependencies
     - bun run ui:build     # Build the Vite + React app
+    - docker build -t fractals-container .
     - echo "Successfully built the application"  # Placeholder message
   only:
     - main  # Run this job only on the main branch
