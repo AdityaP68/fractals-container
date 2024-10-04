@@ -1,0 +1,35 @@
+stages:
+  - lint
+  - test
+  - build
+
+# Linting stage
+lint:
+  stage: lint
+  image: bun:latest  # Use the Bun.js Docker image
+  script:
+    - bun install      # Install dependencies
+    - bun lint         # Run your linting command (update if necessary)
+  only:
+    - main  # Run this job only on the main branch
+
+# Testing stage
+test:
+  stage: test
+  image: bun:latest
+  script:
+    - bun install      # Install dependencies
+    - bun test         # Run your tests
+  only:
+    - main
+
+# Build and serve stage
+build:
+  stage: build
+  image: bun:latest
+  script:
+    - bun install      # Install dependencies
+    - bun build        # Build the Vite + React app
+    - echo "Successfully built the application"  # Placeholder message
+  only:
+    - main
