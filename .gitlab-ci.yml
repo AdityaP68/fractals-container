@@ -6,19 +6,19 @@ stages:
 # Linting stage
 lint:
   stage: lint
-  image: bun:latest  # Use the Bun.js Docker image
+  image: oven/bun:latest  # Use the official Bun Docker image
   script:
-    - bun install      # Install dependencies
-    - bun run ui:lint  # Run your linting command
+    - bun install          # Install dependencies
+    - bun run ui:lint      # Run your linting command (update if necessary)
   only:
     - main  # Run this job only on the main branch
 
 # Testing stage
 test:
   stage: test
-  image: bun:latest
+  image: oven/bun:latest  # Use the official Bun Docker image
   script:
-    - bun install      # Install dependencies
+    - bun install          # Install dependencies
     - |
       if bun run ui:test; then
         echo "Tests ran successfully.";
@@ -26,17 +26,26 @@ test:
         echo "No test script defined in package.json.";
       fi
   only:
-    - main
+    - main  # Run this job only on the main branch
 
-# Build stage
+# Build and serve stage
 build:
   stage: build
-  image: bun:latest
+  image: oven/bun:latest  # Use the official Bun Docker image
   script:
-    - bun install 
-    - bun run ui:install  # Install dependencies again
-    - bun run ui:build    # Build the Vite + React app
-    - bun run build        # Final build command, if necessary
+    - bun install          # Install dependencies
+    - bun run ui:install   # Install UI dependencies
+    - bun run ui:build     # Build the Vite + React app
     - echo "Successfully built the application"  # Placeholder message
   only:
-    - main
+    - main  # Run this job only on the main branch
+
+# Deploy stage (optional)
+# deploy:
+#   stage: deploy
+#   image: oven/bun:latest
+#   script:
+#     - docker build -t your-image-name . # Build your Docker image
+#     - docker run -d -p 3000:3000 your-image-name # Run your Docker container
+#   only:
+#     - main
